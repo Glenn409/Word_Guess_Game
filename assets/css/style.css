@@ -20,11 +20,8 @@ body{
 }
 .container {
     width:960px;
-    text-align:center;
     margin:0;
     display:flex;
-    justify-content: center;
-    align-content: center;
     margin:auto;
     flex-direction: column;
 }

@@ -8,7 +8,8 @@ var underlines = document.getElementById('underlines');
 var guesses = document.getElementById('guesses_remaining');
 var start_button = document.getElementById('start_button');
 var wrong_guesses_element = document.getElementById('user_wrong_guesses');
-var hidden_string = document.getElementById('hidden_string');
+// var hidden_string = document.getElementById('hidden_string');
+var wins_div = document.getElementById('wins');
 
 
 var guess_count = 12;
@@ -63,7 +64,7 @@ function guess_check(keyPress,song){
             wrong_guesses.push(keyPress);
             guess_count = guess_count - 1;
             guesses.textContent = guess_count;
-            wrong_guesses_element.textContent = wrong_guesses;
+            wrong_guesses_element.textContent = wrong_guesses.join(' ');
         } else if (x === true){
             //
         }
@@ -119,17 +120,18 @@ document.getElementById('start_button').addEventListener('click',function(){
 
     var current_song = secret_song.textContent; //grabs the song we are guessing
     var hidden_song = starting_empty_song(current_song); //hidden song is the updating element when user guesses true
+    console.log(hidden_song + " hidden song")
+    
 
-    hidden_string.textContent = hidden_song; //div holding the hidden song
-    underlines.textContent = underline_div(current_song); //creates blank underline div to match song length
+     //creates blank underline div to match song length
+    // hidden_song.textContent = underline_word.join(' ') 
 
 
     console.log('thecurret song is ' +current_song);
-    console.log('hidden_string is ' + hidden_string.textContent);
+    console.log(underline_word+' is underline_word');
 
 
-
-    hidden_song.textContent = underline_div(secret_song.textContent);
+    // hidden_song.textContent = ( 'what is this')
     guesses.textContent = guess_count;
 
     document.onkeypress = function(event){
@@ -138,12 +140,16 @@ document.getElementById('start_button').addEventListener('click',function(){
         //checks if keypress is wrong if wrong updates guess count and list of wrong guesses
         guess_check(userGuess,current_song);
         //updates hidden song if keypress is in hidden song
-        hidden_song = change_hidden_letters(userGuess,current_song,hidden_song);
-        hidden_string.textContent = hidden_song;
+        // underline_word = change_hidden_letters(userGuess,current_song,current_song);  
+        // console.log(underline_word + ' is underline_word');    
+        // // console.log(hidden_song + ' is the hidden song');  
+        // underline_word.textContent = underline_word;
         //check if you win after each keypress
-        if(check_win(hidden_song)){
-            alert('you win');
-        }
+        // if(check_win(hidden_song)){
+        //     alert('you win');
+        //     wins++;
+        //     wins_div.textContent = wins;
+        // }
     }
 
 })
