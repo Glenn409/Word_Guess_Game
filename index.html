@@ -9,32 +9,35 @@
     <title>iconic EMD hits</title>
 </head>
 <body>
-    <h1> SONG GUESSER </h1>
 
-    <div>
-        <h1>Your Mystery Song</h1>
-        <button id='start_button'>
-            Start
-        </button>
-        <p id='secret_word'>secret word here</p>
-        <p id='hidden_string'>hidden string</p>
-        <p id='mystery_word'>Blank Array HERE</p>
+    <div class='container'>
+        <div>
+            <h1 class='nav-header'> SONG GUESSER </h1>
+            
+            <button id='start_button'>
+                Start
+            </button>
+            <p id='secret_word'>secret word here</p>
+            <p id='hidden_string'>hidden string</p>
+            <p id='underlines'>Blank Array HERE</p>
+        </div>
+
+        <div>
+            <h2></h2>
+            <h2>Letters You have Already Guessed</h2>
+            <p id='user_wrong_guesses'></p>
+        </div>
+
+        <h1>You Have 
+            <span id='guesses_remaining'>_</span>
+            Guesses Remaining!
+        </h1>
+
+
+        <h1>Wins: 
+            <span id='wins'>0</span> 
+        </h1>
     </div>
-
-    <div>
-        <h2>Letters You have Already Guessed</h2>
-        <p id='user_wrong_guesses'></p>
-    </div>
-
-    <h1>You Have 
-        <span id='guesses_remaining'>_</span>
-         Guesses Remaining!
-    </h1>
-
-
-    <h1>Wins: 
-        <span id='wins'>0</span> 
-    </h1>
 </body>
 <script type='text/javascript' src='/assets/javascript/game.js'></script>
 </html>

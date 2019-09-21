@@ -4,11 +4,12 @@
 var song_list = ['idk','maybethis','oranges','apples','areallyextralongname'];
 
 var secret_song = document.getElementById('secret_word');
-var hidden_song = document.getElementById('mystery_word');
+var underlines = document.getElementById('underlines');
 var guesses = document.getElementById('guesses_remaining');
 var start_button = document.getElementById('start_button');
 var wrong_guesses_element = document.getElementById('user_wrong_guesses');
 var hidden_string = document.getElementById('hidden_string');
+
 
 var guess_count = 12;
 var wrong_guesses = [];
@@ -22,14 +23,13 @@ function randomSong(song_array){
 
 // gets length of secret_song and creates a _ _ _ _ _ for appropiate length
 function underline_div(song){
-    var song_string =""
+    var song_array = []
     for (i=0;i<song.length;i++){
-        song_string = song_string + "_ ";
+        song_array.push('_')
     }
-    song_string = song_string.slice(0,-1);
-    return song_string;
+    return song_array;
 };
-//Checks if letter is repeating
+//Checks if letter is repeating 
 function repeating(userPress,array){
     for(i=0;i < array.length; i++){
         if (userPress === array[i]){
@@ -50,7 +50,7 @@ function guess_check(keyPress,song){
     //checks if letter is in word it returns true or false
     for(i=0;i<song.length;i++){
         if(keyPress === song[i]){
-            console.log('true');
+            console.log(song[i]);
             x = true;
             break;
         } else {
@@ -72,47 +72,78 @@ function guess_check(keyPress,song){
 }
 //function takes secret song and replaces it with spaces
 function text_hidden(song){
-    var song_string = "";
+    var song_array = [];
     for(i=0;i<song.length;i++){
-        song_string = song_string + 'x' + ' ';
+        song_array.push('x');
     }
-    return song_string;
+    return song_array;
 }
-//
+//starts game with empty array for the user guesses
+function starting_empty_song(song){
+    var song_array = []
+    for (i=0;i<song.length;i++){
+        song_array.push(' ')
+    }
+    return song_array;
+};
 
-// function display(song){
-//     var song_string = "";
-//     for(i=0;i<song.length;i++){
-//         song_string = song_string + 'x' + ' ';
-//     }
-//     return song_string;
-// }
-//}
 
 //function changes hidden_string text if key press is a accurate guess
-function change_hidden_letters(keyPress,song){
-
+function change_hidden_letters(keyPress,song,array){
+    console.log(array);
+    for (i = 0; i < song.length; i++){
+        if(keyPress === song[i]){
+            array[i] = keyPress;
+        }
+    }
+    console.log(array);
+    return array;
 }
-
+//checks the Hidden Song array to see if theres any blank spaces, if no Blank spaces returns a Win status for user;
+function check_win(array){
+    var win_status = false;
+    for(i=0; i < array.length; i++){
+        if(array[i] === ' '){
+            win_status = false;
+            break;
+        } else if (array[i] != ' '){
+            win_status = true
+        };
+    }
+    return win_status;
+}
 // starts the game
 document.getElementById('start_button').addEventListener('click',function(){
     secret_song.textContent = randomSong(song_list);
-    var current_song = secret_song.textContent;
-    console.log('thecurret song is ' +current_song);
 
-    hidden_string.textContent = text_hidden(current_song);
-    console.log(hidden_string.textContent);
+
+    var current_song = secret_song.textContent; //grabs the song we are guessing
+    var hidden_song = starting_empty_song(current_song); //hidden song is the updating element when user guesses true
+
+    hidden_string.textContent = hidden_song; //div holding the hidden song
+    underlines.textContent = underline_div(current_song); //creates blank underline div to match song length
+
+
+    console.log('thecurret song is ' +current_song);
+    console.log('hidden_string is ' + hidden_string.textContent);
+
 
 
     hidden_song.textContent = underline_div(secret_song.textContent);
     guesses.textContent = guess_count;
 
     document.onkeypress = function(event){
+        //grabs users keypress
         userGuess = event.key;
-        //console.log(userGuess);
+        //checks if keypress is wrong if wrong updates guess count and list of wrong guesses
         guess_check(userGuess,current_song);
-        //console.log(wrong_guesses_element)
-       
+        //updates hidden song if keypress is in hidden song
+        hidden_song = change_hidden_letters(userGuess,current_song,hidden_song);
+        hidden_string.textContent = hidden_song;
+        //check if you win after each keypress
+        if(check_win(hidden_song)){
+            alert('you win');
+        }
     }
 
 })
