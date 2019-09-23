@@ -191,7 +191,7 @@ document.getElementById('start_button').addEventListener('click',function(){
         } else if (guess_count === 0){
             loses++;
             loses_div.textContent = ('Loses: ' + loses);
-            alert('You Lose!');
+            alert('You Lose!');d
             start_newgame();
         }
     }
