@@ -103,3 +103,16 @@ body{
     padding-top:10px;
     padding-bottom:10px;
 }
+#disclaimer {
+    padding-top:5px;
+    padding-bottom:5px;
+    border-top:2px solid #C8AA6E;
+    font-size:20px;
+    position: absolute;
+    bottom:0;
+    width:100%;
+    background-color:black;
+    text-align: center;
+    font-style: italic;
+    font-weight: 100;
+}
