@@ -135,6 +135,7 @@ function champion_class_check(array){
 
 // starts the game
 document.getElementById('start_button').addEventListener('click',function(){
+    document.getElementById('start_button').textContent = 'Restart';
     var class_list = array_list[Math.floor(Math.random()*array_list.length)];
     secret_song.textContent = champion_class_check(class_list);
     var secret_champ = randomSong(class_list);
@@ -161,13 +162,16 @@ document.getElementById('start_button').addEventListener('click',function(){
         secret_song.textContent = champion_class_check(class_list);
         secret_champ = randomSong(class_list);
         current_champ = secret_champ;
-        //console.log(current_champ);
+        console.log(current_champ);
         current_champ = current_champ.toLowerCase();
         hidden_champ = starting_empty_song(current_champ);
         underline_word = underline_div(hidden_champ);
         underlines.textContent = underline_word.join(' ');
         guesses.textContent = guess_count;
     } 
+    document.getElementById('start_button').onclick = function(){
+        start_newgame();
+    }
     document.onkeypress = function(event){
         //grabs users keypress
         userGuess = event.key;
@@ -191,7 +195,7 @@ document.getElementById('start_button').addEventListener('click',function(){
         } else if (guess_count === 0){
             loses++;
             loses_div.textContent = ('Loses: ' + loses);
-            alert('You Lose!');d
+            alert('You Lose!');
             start_newgame();
         }
     }
