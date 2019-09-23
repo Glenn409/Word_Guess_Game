@@ -190,12 +190,12 @@ document.getElementById('start_button').addEventListener('click',function(){
         if(check_win(hidden_champ)){
             wins++;
             wins_div.textContent = ('Wins: ' +wins);
-            alert('you win');
+            alert('You Win! The answer was '+ current_champ);
             start_newgame();
         } else if (guess_count === 0){
             loses++;
             loses_div.textContent = ('Loses: ' + loses);
-            alert('You Lose!');
+            alert('You Lose! The answer was ' + current_champ);
             start_newgame();
         }
     }
