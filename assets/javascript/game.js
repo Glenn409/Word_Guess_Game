@@ -126,7 +126,7 @@ function champion_class_check(array){
     } else if (array === support_list){
         return ' Support';
     } else if (array === marksmen_list){
-        return " Marksmen";
+        return " Marksman";
     } else {
         return console.error('no class found');
         
