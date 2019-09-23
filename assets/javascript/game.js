@@ -1,7 +1,10 @@
 //
 //All my arrays and variables needed throughout the project
 //
-var song_list = ['idk','maybethis','oranges','apples','areallyextralongname'];
+
+var fighter_list = ['Nasus','Darius','Mordekaiser','Illaoi','Trundle','Olaf','Garen','Shyvana','Udyr','Dr. Mundo','Volibear','Yorick','Vi','Xin Zhao']
+
+var song_list = fighter_list;
 
 var secret_song = document.getElementById('secret_word');
 var underlines = document.getElementById('underlines');

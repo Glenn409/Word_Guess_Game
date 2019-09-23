@@ -9,35 +9,29 @@
     <title>iconic EMD hits</title>
 </head>
 <body>
-
-    <div class='container'>
-        <div>
-            <h1 class='nav-header'> SONG GUESSER </h1>
+    <div class='my-container'>
+        <div class='main'>
+            <h1 class='header'> Champion Guesser </h1>
             
             <button id='start_button'>
                 Start
             </button>
-            <p id='secret_word'>secret word here</p>
-            <!-- <p id='hidden_string'>hidden string</p> -->
-            <p id='underlines'>Blank Array HERE</p>
+            <p>- - Champion Class: <span id='secret_word'></span> - -</p>
+            <p id='underlines'></p>
+            <div class='body-box'>
+                <div class='letters'>
+                    <p id='guess_array'>- Guessed Letters -</p>
+                    <p id='user_wrong_guesses'></p>
+                </div>
+                <div class='letters'>
+                    <p>- Remaining Guesses Left -</p>
+                    <p id='guesses_remaining'>12</p>
+                </div>
+            </div>
+            <p id='wins'>Wins: 0</p>
         </div>
-
-        <div>
-            <h2></h2>
-            <h2>Letters You have Already Guessed</h2>
-            <p id='user_wrong_guesses'></p>
-        </div>
-
-        <h1>You Have 
-            <span id='guesses_remaining'>_</span>
-            Guesses Remaining!
-        </h1>
-
-
-        <h1>Wins: 
-            <span id='wins'>0</span> 
-        </h1>
     </div>
+
 </body>
 <script type='text/javascript' src='/assets/javascript/game.js'></script>
 </html>
