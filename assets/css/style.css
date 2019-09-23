@@ -48,7 +48,6 @@ body{
     
 }
 .main {
-    height:50%;
     width:50%;
     color:#F0E6D2;
     text-align: center;
@@ -99,4 +98,8 @@ body{
 }
 #underlines{
     padding-bottom:20px;
+}
+#wins{
+    padding-top:10px;
+    padding-bottom:10px;
 }

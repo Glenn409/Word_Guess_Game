@@ -2,9 +2,14 @@
 //All my arrays and variables needed throughout the project
 //
 
-var fighter_list = ['Nasus','Darius','Mordekaiser','Illaoi','Trundle','Olaf','Garen','Shyvana','Udyr','Dr. Mundo','Volibear','Yorick','Vi','Xin Zhao']
+var fighter_list = ['Nasus','Darius','Mordekaiser','Illaoi','Trundle','Olaf','Garen','Shyvana','Udyr','Volibear','Yorick','Vi','Nocturne', 'Pantheon','Warwick','irelia','Hecarim'];
+var assassin_list = ['Zed','Fizz','Leblanc','Akali','Talon','Katarina','Kassadin','Shaco','Rengar'];
+var mage_list =['Ryze','Swain','Rumble','Malzahar','Ziggs','Xerath','Cassiopeia'];
+var support_list =['Janna','Nami','Morgana','Lulu','Bard','Zilean','Taric','Karma'];
+var marksmen_list = ['Vayne','Caitlyn','Ashe','Corki','Draven','Jinx','Kalista','Lucian','Sivir','Tristana','Kindred','Ezreal','Twitch','Quinn','Jhin','Graves']
 
-var song_list = fighter_list;
+var array_list = [fighter_list,assassin_list,mage_list,support_list,marksmen_list];
+
 
 var secret_song = document.getElementById('secret_word');
 var underlines = document.getElementById('underlines');
@@ -13,6 +18,7 @@ var start_button = document.getElementById('start_button');
 var wrong_guesses_element = document.getElementById('user_wrong_guesses');
 // var hidden_string = document.getElementById('hidden_string');
 var wins_div = document.getElementById('wins');
+var loses_div = document.getElementById('loses');
 
 
 var guess_count = 12;
@@ -42,12 +48,6 @@ function repeating(userPress,array){
         }
     }
 }
-//function to check guesscounter and end game.
-function guessCount_checker(){
-    if(guess_count === 0){
-        alert('you have lost! please refresh to restart!');
-    }
-}
 //takes the user's keypress as a guesss
 function guess_check(keyPress,song){
     var x;
@@ -72,7 +72,6 @@ function guess_check(keyPress,song){
             //
         }
     }
-    guessCount_checker();
 }
 //function takes secret song and replaces it with spaces
 function text_hidden(song){
@@ -116,42 +115,84 @@ function check_win(array){
     }
     return win_status;
 }
+//updates class hint
+function champion_class_check(array){
+    if (array === fighter_list){
+        return ' Fighter';
+    } else if (array === mage_list){
+        return ' Mage';
+    } else if (array === assassin_list){
+        return " Assassin";
+    } else if (array === support_list){
+        return ' Support';
+    } else if (array === marksmen_list){
+        return " Marksmen";
+    } else {
+        return console.error('no class found');
+        
+    }
+}
+
 // starts the game
 document.getElementById('start_button').addEventListener('click',function(){
-    secret_song.textContent = randomSong(song_list);
-    console.log(secret_song);
+    var class_list = array_list[Math.floor(Math.random()*array_list.length)];
+    secret_song.textContent = champion_class_check(class_list);
+    var secret_champ = randomSong(class_list);
+ 
 
-
-    var current_song = secret_song.textContent; //grabs the song we are guessing
-    var hidden_song = starting_empty_song(current_song); //hidden song is the updating element when user guesses true
-    console.log(hidden_song + " hidden song")
-    console.log(current_song + ' current song')
-
-     //creates blank underline div to match song length
-     var underline_word = underline_div(hidden_song);
+    var current_champ = secret_champ;
+    //console.log(current_champ);
+    
+    current_champ = current_champ.toLowerCase();
+     //grabs the song we are guessing
+    var hidden_champ = starting_empty_song(current_champ); //hidden song is the updating element when user guesses true
+    //creates blank underline div to match song length
+     var underline_word = underline_div(hidden_champ);
      underlines.textContent = underline_word.join(' ');
-
-
-
-    // hidden_song.textContent = ( 'what is this')
+    // hidden_champ.textContent = ( 'what is this')
     guesses.textContent = guess_count;
 
+    //resets game 
+    function start_newgame(){
+        guess_count = 12;
+        wrong_guesses = [];
+        wrong_guesses_element.textContent = "";
+        class_list = array_list[Math.floor(Math.random()*array_list.length)];
+        secret_song.textContent = champion_class_check(class_list);
+        secret_champ = randomSong(class_list);
+        current_champ = secret_champ;
+        //console.log(current_champ);
+        current_champ = current_champ.toLowerCase();
+        hidden_champ = starting_empty_song(current_champ);
+        underline_word = underline_div(hidden_champ);
+        underlines.textContent = underline_word.join(' ');
+        guesses.textContent = guess_count;
+    } 
     document.onkeypress = function(event){
         //grabs users keypress
         userGuess = event.key;
+        userGuess = userGuess.toLowerCase();
+
+
         //checks if keypress is wrong if wrong updates guess count and list of wrong guesses
-        guess_check(userGuess,current_song);
+        guess_check(userGuess,current_champ);
         //updates hidden song if keypress is in hidden song
-        hidden_song = change_hidden_letters(userGuess,current_song,hidden_song);   
-        console.log(hidden_song + ' is the hidden song');  
-        underlines.textContent = hidden_song.join(' ');
+        hidden_champ = change_hidden_letters(userGuess,current_champ,hidden_champ);   
+        //console.log(hidden_champ + ' is the hidden song');  
+        underlines.textContent = hidden_champ.join(' ');
 
 
         //check if you win after each keypress
-        if(check_win(hidden_song)){
-            alert('you win');
+        if(check_win(hidden_champ)){
             wins++;
-            wins_div.textContent = wins;
+            wins_div.textContent = ('Wins: ' +wins);
+            alert('you win');
+            start_newgame();
+        } else if (guess_count === 0){
+            loses++;
+            loses_div.textContent = ('Loses: ' + loses);
+            alert('You Lose!');
+            start_newgame();
         }
     }
 
