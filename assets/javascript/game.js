@@ -99,7 +99,7 @@ function change_hidden_letters(keyPress,song,array){
             array[i] = keyPress;
         }
     }
-    console.log(array);
+    //console.log(array);
     return array;
 }
 //checks the Hidden Song array to see if theres any blank spaces, if no Blank spaces returns a Win status for user;
